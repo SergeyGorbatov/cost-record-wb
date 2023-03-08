@@ -55,7 +55,6 @@ const deleteIncomes = async (req, res) => {
   try {
     const result = await Income.deleteMany({});
     res.status(200).send(result);
-    res.status(200).send(result);
   } catch (err) {
     res.status(400).send("Failed to create a cost");
   }
