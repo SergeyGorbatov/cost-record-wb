@@ -2,11 +2,17 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllCosts,
+  getCosts,
+  getIncomes,
   createNewCost,
-} = require("../controllers/cost-controllers");
+  createNewIncome,
+  deleteCollections,
+} = require("../controllers/controllers");
 
-router.get("/costs", getAllCosts);
+router.get("/costs", getCosts);
+router.get("/incomes", getIncomes);
 router.post("/costs", createNewCost);
+router.post("/income", createNewIncome);
+router.delete("/delete", deleteCollections);
 
 module.exports = router;
