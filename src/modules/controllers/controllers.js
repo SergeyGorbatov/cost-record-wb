@@ -42,11 +42,20 @@ const createNewIncome = async (req, res) => {
   }
 };
 
-const deleteCollections = async (req, res) => {
+const deleteCosts = async (req, res) => {
   try {
-    await Cost.deleteMany({});
-    await Income.deleteMany({});
-    res.status(200).send("Clear");
+    const result = await Cost.deleteMany({});
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(400).send("Failed to create a cost");
+  }
+};
+
+const deleteIncomes = async (req, res) => {
+  try {
+    const result = await Income.deleteMany({});
+    res.status(200).send(result);
+    res.status(200).send(result);
   } catch (err) {
     res.status(400).send("Failed to create a cost");
   }
@@ -57,5 +66,6 @@ module.exports = {
   getIncomes,
   createNewCost,
   createNewIncome,
-  deleteCollections,
+  deleteCosts,
+  deleteIncomes
 };

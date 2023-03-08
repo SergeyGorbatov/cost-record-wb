@@ -6,13 +6,16 @@ const {
   getIncomes,
   createNewCost,
   createNewIncome,
-  deleteCollections,
+  deleteIncomes,
+  deleteCosts
 } = require("../controllers/controllers");
 
 router.get("/costs", getCosts);
-router.get("/incomes", getIncomes);
 router.post("/costs", createNewCost);
-router.post("/income", createNewIncome);
-router.delete("/delete", deleteCollections);
+router.delete("/costs", deleteCosts);
+
+router.get("/incomes", getIncomes);
+router.post("/incomes", createNewIncome);
+router.delete("/incomes", deleteIncomes);
 
 module.exports = router;
