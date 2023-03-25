@@ -11,4 +11,3 @@ const costSchema = new Schema({
 
 module.exports = Cost = mongoose.model('Costs', costSchema);
 
-//.toLocaleDateString('ru')

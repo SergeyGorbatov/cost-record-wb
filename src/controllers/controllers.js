@@ -1,13 +1,13 @@
-const Cost = require("../../models/cost");
-const Income = require("../../models/income");
+const Cost = require("../models/cost");
+const Income = require("../models/income");
+const costService = require("../service/cost-service");
 
-const getCosts = async (req, res) => {
+const getCosts = async (req, res, next) => {
   try {
-    const allCosts = await Cost.find();
-
-    res.status(200).send(allCosts);
-  } catch (err) {
-    res.status(400).send("Failed to get all costs");
+    const allCosts = await costService.getCosts();
+    return res.json(allCosts);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -66,5 +66,5 @@ module.exports = {
   createNewCost,
   createNewIncome,
   deleteCosts,
-  deleteIncomes
+  deleteIncomes,
 };

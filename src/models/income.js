@@ -11,4 +11,3 @@ const incomeSchema = new Schema({
 
 module.exports = Income = mongoose.model('Income', incomeSchema);
 
-//.toLocaleDateString('ru')
