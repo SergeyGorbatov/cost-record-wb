@@ -11,7 +11,11 @@ const cookieParser = require("cookie-parser");
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: "*", // Разрешаем запросы с любых доменов
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Разрешаем все методы
+  allowedHeaders: "Content-Type, Authorization", // Разрешаем эти заголовки
+}));
 app.use("/api", router);
 app.use(errorMiddleware);
 
