@@ -1,6 +1,5 @@
-const Cost = require("../models/cost");
-const Income = require("../models/income");
 const costService = require("../service/cost-service");
+const incomeService = require("../service/income-service");
 
 const getCosts = async (req, res, next) => {
   try {
@@ -11,52 +10,48 @@ const getCosts = async (req, res, next) => {
   }
 };
 
-const getIncomes = async (req, res) => {
-  try {
-    const allIncomes = await Income.find();
-    res.status(200).send(allIncomes);
-  } catch (err) {
-    res.status(400).send("Failed to get all costs");
-  }
-};
-
 const createNewCost = async (req, res) => {
   try {
-    const data = await req.body;
-    const cost = new Cost(data);
-    const result = await cost.save();
-    res.status(200).send(result);
-  } catch (err) {
-    res.status(400).send("Failed to create a cost");
-  }
-};
-
-const createNewIncome = async (req, res) => {
-  try {
-    const data = await req.body;
-    const income = new Income(data);
-    const result = await income.save();
-    res.status(200).send(result);
-  } catch (err) {
-    res.status(400).send("Failed to create a cost");
+    const newCost = await costService.createNewCost(req);
+    return res.json(newCost);
+  } catch (error) {
+    next(error);
   }
 };
 
 const deleteCosts = async (req, res) => {
   try {
-    const result = await Cost.deleteMany({});
-    res.status(200).send(result);
+    const deleteCosts = await costService.deleteCosts();
+    return res.json(deleteCosts);
   } catch (err) {
-    res.status(400).send("Failed to create a cost");
+    next(error);
+  }
+};
+
+const getIncomes = async (req, res) => {
+  try {
+    const allIncomes = await incomeService.getIncomes();
+    return res.json(allIncomes);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createNewIncome = async (req, res) => {
+  try {
+    const newIncome = await incomeService.createNewIncome(req);
+    return res.json(newIncome);
+  } catch (error) {
+    next(error);
   }
 };
 
 const deleteIncomes = async (req, res) => {
   try {
-    const result = await Income.deleteMany({});
-    res.status(200).send(result);
+    const deleteIncomes = await incomeService.deleteIncomes();
+    return res.json(deleteIncomes);
   } catch (err) {
-    res.status(400).send("Failed to create a cost");
+    next(error);
   }
 };
 

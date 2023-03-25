@@ -1,16 +1,21 @@
-const UserModel = require("../models/user");
-const bcrypt = require("bcrypt");
-const uuid = require("uuid");
-const mailService = require("./mail-service");
-const tokenService = require("./token-service");
-const UserDto = require("../dtos/user-dto");
-const ApiError = require("../exceptions/api-error");
 const Cost = require("../models/cost");
 
 class CostService {
   async getCosts() {
     const allCosts = await Cost.find();
     return allCosts;
+  }
+  
+  async createNewCost(req) {
+    const data = await req.body;
+    const cost = new Cost(data);
+    const result = await cost.save();
+    return result;
+  }
+
+  async deleteCosts() {
+    const result = await Cost.deleteMany({});
+    return result;
   }
 }
 
